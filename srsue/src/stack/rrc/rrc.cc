@@ -850,6 +850,9 @@ void rrc::send_con_request(srsran::establishment_cause_t cause)
     for (uint i = 0; i < 5; i++) { // fill random ID bytewise, 40 bits = 5 bytes
       random_id |= ((uint64_t)rand() & 0xFF) << i * 8;
     }
+    /* random_id = 0xDEADBEEFFA;  */
+    random_id = 0x4443323921;
+    logger.info("CRONENBURG STRIKES AGAIN n ID: %" PRIu64 "", random_id);
     rrc_conn_req->ue_id.random_value().from_number(random_id);
   }
   rrc_conn_req->establishment_cause = (establishment_cause_opts::options)cause;
@@ -1568,8 +1571,9 @@ void rrc::send_ul_ccch_msg(const ul_ccch_msg_s& msg)
   for (uint32_t i = 0; i < nbytes; i++) {
     ue_cri_ptr[nbytes - i - 1] = pdcp_buf->msg[i];
   }
-
-  logger.debug("Setting UE contention resolution ID: %" PRIu64 "", uecri);
+  uecri = 0xFF;
+  logger.info("CRONENBURG CHUCK Setting UE contention resolution ID: %" PRIu64 "", uecri);
+  /*logger.debug("Setting UE contention resolution ID: %" PRIu64 "", uecri);*/
   mac->set_contention_id(uecri);
 
   uint32_t lcid = srb_to_lcid(lte_srb::srb0);

@@ -503,6 +503,9 @@ static int dci_blind_search(srsran_ue_dl_t*     q,
             INFO("Ignoring message with size %d, already decoded", dci_msg[nof_dci].nof_bits);
           }
         }
+	else {
+	    INFO("CRONENBURG: Got someone else's Temp-RNTI 0x%x", dci_msg[nof_dci].rnti);
+	}
       }
     }
   } else {
