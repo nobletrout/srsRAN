@@ -100,6 +100,7 @@ void demux::push_pdu_temp_crnti(uint8_t* buff, uint32_t nof_bytes)
       switch (pending_mac_msg.get()->dl_sch_ce_type()) {
         case srsran::dl_sch_lcid::CON_RES_ID:
           if (!is_uecrid_successful) {
+            Debug("CRONENBURG RES ID IS 0x%x\r\n", pending_mac_msg.get()->get_con_res_id());
             Debug("Found Contention Resolution ID CE");
             is_uecrid_successful = mac->contention_resolution_id_rcv(pending_mac_msg.get()->get_con_res_id());
           }
